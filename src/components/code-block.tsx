@@ -5,9 +5,9 @@ import { Highlight, themes } from "prism-react-renderer";
 import { Check, Copy } from "lucide-react";
 
 interface CodeBlockProps {
-  code: string;
-  language?: string;
-  title?: string;
+  readonly code: string;
+  readonly language?: string;
+  readonly title?: string;
 }
 
 export function CodeBlock({ code, language = "bash", title }: CodeBlockProps) {
@@ -22,7 +22,7 @@ export function CodeBlock({ code, language = "bash", title }: CodeBlockProps) {
   return (
     <div className="group relative rounded-xl overflow-hidden border border-brand-purple/10 dark:border-brand-purple/15 my-4 shadow-sm dark:shadow-brand-purple/5">
       {title && (
-        <div className="flex items-center justify-between px-4 py-2 bg-[#1A0F2C] border-b border-white/[0.08]">
+        <div className="flex items-center justify-between px-4 py-2 bg-brand-dark border-b border-white/8">
           <span className="text-xs font-medium text-brand-teal-light font-mono">
             {title}
           </span>
@@ -36,15 +36,16 @@ export function CodeBlock({ code, language = "bash", title }: CodeBlockProps) {
               style={{ ...style, background: "#1A0F2C", margin: 0 }}
             >
               {tokens.map((line, i) => {
+                const lineId = line.map(t => t.content).join("").trim() || `l${i}`;
                 const { key: _lineKey, ...lineProps } = getLineProps({ line, key: i });
                 return (
-                  <div key={i} {...lineProps}>
+                  <div key={lineId} {...lineProps}>
                     <span className="inline-block w-8 text-right mr-4 text-white/20 select-none text-xs">
                       {i + 1}
                     </span>
                     {line.map((token, j) => {
                       const { key: _tokenKey, ...tokenProps } = getTokenProps({ token, key: j });
-                      return <span key={j} {...tokenProps} />;
+                      return <span key={`token-${i}-${j}`} {...tokenProps} />;
                     })}
                   </div>
                 );

@@ -2,9 +2,9 @@ import { type ReactNode } from "react";
 import { Info, AlertTriangle, CheckCircle } from "lucide-react";
 
 interface CalloutProps {
-  type?: "info" | "warning" | "success";
-  title?: string;
-  children: ReactNode;
+  readonly type?: "info" | "warning" | "success";
+  readonly title?: string;
+  readonly children: ReactNode;
 }
 
 const variants = {

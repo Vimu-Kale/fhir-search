@@ -196,6 +196,30 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Font weight scaling via data attribute */
+html[data-font-weight="medium"] body {
+  font-weight: 500;
+}
+html[data-font-weight="medium"] h1,
+html[data-font-weight="medium"] h2,
+html[data-font-weight="medium"] h3,
+html[data-font-weight="medium"] h4,
+html[data-font-weight="medium"] h5,
+html[data-font-weight="medium"] h6 {
+  font-weight: 700;
+}
+html[data-font-weight="bold"] body {
+  font-weight: 600;
+}
+html[data-font-weight="bold"] h1,
+html[data-font-weight="bold"] h2,
+html[data-font-weight="bold"] h3,
+html[data-font-weight="bold"] h4,
+html[data-font-weight="bold"] h5,
+html[data-font-weight="bold"] h6 {
+  font-weight: 800;
+}
+
 /* Dark mode transitions */
 html, body, main {
   transition: background-color 0.3s ease, color 0.3s ease;

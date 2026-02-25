@@ -1,25 +1,26 @@
 import { type ReactNode } from "react";
 
 interface DocSectionProps {
-  id: string;
-  title: string;
-  children: ReactNode;
-  level?: 1 | 2 | 3;
+  readonly id: string;
+  readonly title: string;
+  readonly children: ReactNode;
+  readonly level?: 1 | 2 | 3;
 }
 
 export function DocSection({ id, title, children, level = 2 }: DocSectionProps) {
-  const Tag = level === 1 ? "h1" : level === 2 ? "h2" : "h3";
-  const sizeClasses =
-    level === 1
-      ? "text-3xl font-bold"
-      : level === 2
-      ? "text-2xl font-semibold"
-      : "text-lg font-semibold";
+  const tagMap = { 1: "h1", 2: "h2", 3: "h3" } as const;
+  const Tag = tagMap[level];
+  const sizeMap = {
+    1: "text-3xl font-bold",
+    2: "text-2xl font-semibold",
+    3: "text-lg font-semibold",
+  } as const;
+  const sizeClasses = sizeMap[level];
 
   return (
     <section id={id} className="scroll-mt-24 mb-12">
       <Tag
-        className={`${sizeClasses} text-foreground font-[family-name:var(--font-poppins)] mb-4 group flex items-center gap-2`}
+        className={`${sizeClasses} text-foreground font-(family-name:--font-poppins) mb-4 group flex items-center gap-2`}
       >
         <a
           href={`#${id}`}
@@ -31,7 +32,7 @@ export function DocSection({ id, title, children, level = 2 }: DocSectionProps) 
           #
         </span>
       </Tag>
-      <div className="text-foreground/80 leading-relaxed space-y-4 font-[family-name:var(--font-inter)]">
+      <div className="text-foreground/80 leading-relaxed space-y-4 font-(family-name:--font-inter)">
         {children}
       </div>
     </section>

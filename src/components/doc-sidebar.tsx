@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import Image from "next/image";
+import logoImg from "../../public/logo.png";
 import {
   Search,
   BookOpen,
@@ -329,8 +329,9 @@ export function DocSidebar() {
         <div className="relative h-full flex flex-col overflow-hidden">
           {/* Logo area */}
           <div className="flex items-center gap-3 px-3 py-5 border-b border-white/[0.08] shrink-0">
-            <Image
-              src="/logo.png"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={logoImg.src}
               alt="FHIR Search Logo"
               width={32}
               height={32}
